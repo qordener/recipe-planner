@@ -1,0 +1,23 @@
+<h1>Liste des repas</h1>
+
+<label for="search">Recherche :</label>
+<input type="text" id="search" [(ngModel)]="searchTerm" />
+
+<ul>
+  <li
+    *ngFor="let meal of meals | filter : searchTerm"
+    (click)="showDetails(meal)"
+  >
+    {{ meal.name }}
+  </li>
+</ul>
+
+<div *ngIf="selectedMeal">
+  <h2>{{ selectedMeal.name }}</h2>
+  <ul>
+    <li *ngFor="let ingredient of selectedMeal.ingredients">
+      {{ ingredient }}
+    </li>
+  </ul>
+  <p>{{ selectedMeal.description }}</p>
+</div>

@@ -1,0 +1,96 @@
+<h2>{{ meal ? "Modifier" : "Ajouter" }} un repas</h2>
+<form (ngSubmit)="onSubmit()" #mealForm="ngForm">
+  <div class="form-group">
+    <label for="name">Nom</label>
+    <input
+      type="text"
+      class="form-control"
+      id="name"
+      name="name"
+      [(ngModel)]="meal.name"
+      required
+    />
+  </div>
+  <div class="form-group">
+    <label for="image">Image URL</label>
+    <input
+      type="text"
+      class="form-control"
+      id="image"
+      name="image"
+      [(ngModel)]="meal.image"
+      required
+    />
+  </div>
+  <div class="form-group">
+    <label for="ingredients">Ingrédients</label>
+    <div
+      *ngFor="let ingredient of meal.ingredients; let i = index"
+      class="form-row"
+    >
+      <div class="col">
+        <input
+          type="text"
+          class="form-control"
+          id="{{ 'ingredient-name-' + i }}"
+          name="{{ 'ingredient-name-' + i }}"
+          [(ngModel)]="ingredient.name"
+          required
+        />
+      </div>
+      <div class="col">
+        <input
+          type="text"
+          class="form-control"
+          id="{{ 'ingredient-quantity-' + i }}"
+          name="{{ 'ingredient-quantity-' + i }}"
+          [(ngModel)]="ingredient.quantity"
+          required
+        />
+      </div>
+    </div>
+    <button
+      type="button"
+      class="btn btn-primary mt-2"
+      (click)="onAddIngredient()"
+    >
+      Ajouter un ingrédient
+    </button>
+  </div>
+  <div class="form-group">
+    <label for="instructions">Instructions</label>
+    <div
+      *ngFor="let instruction of meal.instructions; let i = index"
+      class="form-row"
+    >
+      <div class="col">
+        <textarea
+          class="form-control"
+          id="{{ 'instruction-' + i }}"
+          name="{{ 'instruction-' + i }}"
+          [(ngModel)]="instruction"
+          required
+        ></textarea>
+      </div>
+    </div>
+    <button
+      type="button"
+      class="btn btn-primary mt-2"
+      (click)="addInstruction()"
+    >
+      Ajouter une instruction
+    </button>
+  </div>
+  <div class="form-group">
+    <label for="preparationTime">Temps de préparation (en minutes)</label>
+    <input
+      type="number"
+      class="form-control"
+      id="preparationTime"
+      name="preparationTime"
+      [(ngModel)]="meal.preparationTime"
+      required
+    />
+  </div>
+  <button type="submit" class="btn btn-primary">Enregistrer</button>
+</form>
